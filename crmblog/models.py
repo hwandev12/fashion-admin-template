@@ -9,7 +9,7 @@ class User(AbstractUser):
 class Lead(models.Model):
     class Meta:
         verbose_name = "Lead"
-        verbose_name_plural = "My Leads"
+        verbose_name_plural = "Fashion Leads"
 
     name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
