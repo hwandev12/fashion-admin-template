@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
+{% extends 'base.html' %}
+{% block content %}
   <style>
     .lead_info a {
       width: 100%;
@@ -19,13 +13,11 @@
       color: #444;
     }
   </style>
-  <body>
-    <div class="lead_info">
-      <a href="/leads/create/">Sign up for a new user</a>
+    <div class="lead_info container">
+      <a href="/create/">Sign up for a new user</a>
       <h2>My system Users</h2>
       {% for lead in leads %}
-        <a href="/leads/{{ lead.pk }}/">{{ lead.name }} {{ lead.last_name }}</a>
+        <a href="/{{ lead.pk }}/">{{ lead.name }} {{ lead.last_name }}</a>
       {% endfor %}
     </div>
-  </body>
-</html>
+  {% endblock content %}

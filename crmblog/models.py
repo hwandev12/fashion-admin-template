@@ -14,6 +14,8 @@ class Lead(models.Model):
     name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     age = models.IntegerField(default=0)
+    email = models.EmailField()
+    text_area = models.TextField(max_length=500)
     spy = models.ForeignKey("Spy", on_delete=models.CASCADE)
 
     def __str__(self):

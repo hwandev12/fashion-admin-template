@@ -1,17 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SYSCRM</title>
-</head>
-<body>
-    <a href="/leads">Customers page</a>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
-    </form>
-</body>
-</html>
+{% extends 'base.html' %} {% load static %} {% block content %}
+<link rel="stylesheet" href="{% static 'css/create.css' %}" />
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"
+/>
+<style>
+  form {
+    margin-top: 80px;
+  }
+</style>
+<div class="container mt-5">
+  <form method="post">
+    {% csrf_token %}
+    <div class="text-center mt-5">
+      <h1>Customers Contact</h1>
+    </div>
+    <div class="row">
+      <div class="col-lg-7 mx-auto">
+        <div class="card mt-2 mx-auto p-4 bg-light">
+          <div class="card-body bg-light">
+            <div class="container">
+              <form id="contact-form" role="form">
+                <div class="controls">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="form_name">Firstname *</label>
+                          {{ form.name}}
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="form_lastname">Lastname *</label>
+                        {{ form.last_name }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="form_email">Email *</label>
+                        {{ form.email }}
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="form_need"
+                          >Please specify your need *</label
+                        >
+                        <select
+                          id="form_need"
+                          name="need"
+                          class="form-control"
+                          required="required"
+                          data-error="Please specify your need."
+                        >
+                          <option value="" selected disabled>
+                            --Select Your Issue--
+                          </option>
+                          <option>Request Invoice for order</option>
+                          <option>Request order status</option>
+                          <option>Haven't received cashback yet</option>
+                          <option>Other</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="form_message">Message *</label>
+                        {{ form.text_area }}
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <input
+                        type="submit"
+                        class="btn btn-success btn-send pt-2 btn-block"
+                        value="Send Message"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- /.8 -->
+      </div>
+      <!-- /.row-->
+    </div>
+  </form>
+</div>
+{% endblock content %}

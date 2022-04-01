@@ -5,6 +5,9 @@ from django.shortcuts import get_object_or_404
 from .forms import *
 
 
+def home(request):
+    return render(request, 'base.html')
+
 def leads_info(request):
     leads = Lead.objects.all()
     context = {"leads": leads}
