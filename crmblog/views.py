@@ -11,4 +11,10 @@ def leads_info(request):
 
 def details_lead(request, pk):
     lead = get_object_or_404(models.Lead, id=pk)
-    return render(request, 'details.html')
+    context = {
+        "lead": lead
+    }
+    return render(request, 'details.html', context)
+
+def create_lead(request):
+    return render(request, 'create.html')

@@ -3,5 +3,6 @@ from .views import *
 
 urlpatterns = [
     path("", leads_info, name="home"),
-    path("<pk>/", details_lead)
+    path("<int:pk>/", details_lead),
+    path("create/", create_lead)
 ]

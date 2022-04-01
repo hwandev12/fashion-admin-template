@@ -21,6 +21,7 @@
   </style>
   <body>
     <div class="lead_info">
+      <a href="/leads/create/">Sign up for a new user</a>
       <h2>My system Users</h2>
       {% for lead in leads %}
         <a href="/leads/{{ lead.pk }}/">{{ lead.name }} {{ lead.last_name }}</a>
