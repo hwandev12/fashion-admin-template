@@ -8,6 +8,10 @@
 </head>
 <body>
     <a href="/leads">Customers page</a>
-    <h1>Sign up here</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
 </body>
 </html>

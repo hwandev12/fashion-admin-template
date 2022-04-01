@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Lead
 from . import models
 from django.shortcuts import get_object_or_404
+from .forms import *
 
 
 def leads_info(request):
@@ -17,4 +18,8 @@ def details_lead(request, pk):
     return render(request, 'details.html', context)
 
 def create_lead(request):
-    return render(request, 'create.html')
+    print(request.POST)
+    context = {
+        "form": lead_form()
+    }
+    return render(request, 'create.html', context)
