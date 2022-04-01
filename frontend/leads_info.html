@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .lead_info a {
+      width: 100%;
+      background-color: rgba(87, 79, 79, 0.5);
+      padding: 20px 20px;
+      display: block;
+      margin-top: 10px;
+      text-decoration: none;
+      font-family: sans-serif;
+      font-size: 21px;
+      color: #444;
+    }
+  </style>
+  <body>
+    <div class="lead_info">
+      <h2>My system Users</h2>
+      {% for lead in leads %}
+        <a href="/leads/{{ lead.pk }}/">{{ lead.name }} {{ lead.last_name }}</a>
+      {% endfor %}
+    </div>
+  </body>
+</html>
