@@ -3,26 +3,15 @@ from pyexpat import model
 from django import forms
 from .models import Lead
 
-class LeadModelForm(forms.ModelForm):
-    class Meta:
-        model = Lead
-        fields = (
-            "name",
-            "last_name",
-            "email",
-            "age",
-            "spy",
-        )
 
-
-class lead_form(forms.Form):
+class Lead_form(forms.Form):
     name = forms.CharField(max_length=30)
     last_name = forms.CharField(max_length=30)
     email = forms.EmailField()
     age = forms.IntegerField(min_value=0)
 
     def __init__(self, *args, **kwargs):
-        super(lead_form, self).__init__(*args, **kwargs)
+        super(Lead_form, self).__init__(*args, **kwargs)
         self.fields["name"].widget.attrs = {
             "id": "myCustomId",
             "class": "form-control",

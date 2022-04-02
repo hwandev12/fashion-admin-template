@@ -21,23 +21,22 @@ def details_lead(request, pk):
     return render(request, 'details.html', context)
 
 def create_lead(request):
-    form = LeadModelForm() 
+    form = Lead_form() 
     if request.method == "POST":
-        form = LeadModelForm(request.POST)
+        form = Lead_form(request.POST)
         if form.is_valid():
-            form.save()
-            # name = form.cleaned_data['name']
-            # last_name = form.cleaned_data['last_name']
-            # age = form.cleaned_data['age']
-            # email = form.cleaned_data['email']
-            # spy = models.Spy.objects.first()
-            # models.Lead.objects.create(
-            #     name=name,
-            #     last_name=last_name,
-            #     email=email,
-            #     age=age,
-            #     spy=spy
-            # )
+            name = form.cleaned_data['name']
+            last_name = form.cleaned_data['last_name']
+            age = form.cleaned_data['age']
+            email = form.cleaned_data['email']
+            spy = models.Spy.objects.first()
+            models.Lead.objects.create(
+                name=name,
+                last_name=last_name,
+                email=email,
+                age=age,
+                spy=spy
+            )
             return redirect('/')
     context = {
         "form": form 
