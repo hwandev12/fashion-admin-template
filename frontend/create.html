@@ -52,35 +52,16 @@
                       </div>
                     </div>
                     <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="form_need"
-                          >Please specify your need *</label
-                        >
-                        <select
-                          id="form_need"
-                          name="need"
-                          class="form-control"
-                          required="required"
-                          data-error="Please specify your need."
-                        >
-                          <option value="" selected disabled>
-                            --Select Your Issue--
-                          </option>
-                          <option>Request Invoice for order</option>
-                          <option>Request order status</option>
-                          <option>Haven't received cashback yet</option>
-                          <option>Other</option>
-                        </select>
+                      <label for="form_email">Age *</label>
+                      {{ form.age }}
+                      </div>
+                    <div class="col-md-12">
+                      <label for="form_email">Agent *</label>
+                      {{ form.spy }}
                       </div>
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label for="form_message">Message *</label>
-                        {{ form.text_area }}
-                      </div>
-                    </div>
                     <div class="col-md-12">
                       <input
                         type="submit"

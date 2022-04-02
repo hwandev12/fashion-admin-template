@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Lead
 from . import models
 from django.shortcuts import get_object_or_404
@@ -21,8 +21,25 @@ def details_lead(request, pk):
     return render(request, 'details.html', context)
 
 def create_lead(request):
-    print(request.POST)
+    form = LeadModelForm() 
+    if request.method == "POST":
+        form = LeadModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # name = form.cleaned_data['name']
+            # last_name = form.cleaned_data['last_name']
+            # age = form.cleaned_data['age']
+            # email = form.cleaned_data['email']
+            # spy = models.Spy.objects.first()
+            # models.Lead.objects.create(
+            #     name=name,
+            #     last_name=last_name,
+            #     email=email,
+            #     age=age,
+            #     spy=spy
+            # )
+            return redirect('/')
     context = {
-        "form": lead_form()
+        "form": form 
     }
     return render(request, 'create.html', context)
