@@ -1,0 +1,71 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<link rel="stylesheet" href="{% static 'css/create.css' %}" />
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"
+/>
+<style>
+  form {
+    margin-top: 80px;
+  }
+</style>
+<div class="container mt-5">
+  <form method="post">
+    {% csrf_token %}
+    <div class="text-center mt-5">
+      <h1>Update page for {{ form.name }} {{ form.last_name }}</h1>
+    </div>
+    <div class="row">
+      <div class="col-lg-7 mx-auto">
+        <div class="card mt-2 mx-auto p-4 bg-light">
+          <div class="card-body bg-light">
+            <div class="container">
+              <form id="contact-form" role="form">
+                <div class="controls">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="form_name">Firstname *</label>
+                          {{ form.name}}
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="form_lastname">Lastname *</label>
+                        {{ form.last_name }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <input
+                        type="submit"
+                        class="btn btn-success btn-send pt-2 btn-block"
+                        value="Send Message"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- /.8 -->
+      </div>
+      <!-- /.row-->
+    </div>
+  </form>
+</div>
+{% endblock content %}

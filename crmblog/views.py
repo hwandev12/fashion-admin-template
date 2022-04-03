@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.shortcuts import render, redirect
 from .models import Lead
 from . import models
@@ -37,3 +38,10 @@ def create_lead(request):
             return redirect("/")
     context = {"form": form}
     return render(request, "create.html", context)
+
+def update_lead(request, pk):
+    form = Lead.objects.get(id=pk)
+    context = {
+        "form": form
+    }
+    return render(request, 'update.html', context)
