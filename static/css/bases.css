@@ -2,7 +2,6 @@
 
 :root {
   --header-height: 3rem;
-  --nav-width: 68px;
   --first-color: #4723d9;
   --first-color-light: #afa5d9;
   --white-color: #f7f6fb;
@@ -154,7 +153,6 @@ a {
   }
 
   .header {
-    height: calc(var(--header-height) + 1rem);
     padding: 0 2rem 0 calc(var(--nav-width) + 2rem);
   }
 

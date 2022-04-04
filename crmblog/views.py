@@ -1,6 +1,6 @@
 from multiprocessing import context
 from django.shortcuts import render, redirect
-from .models import Lead
+from .models import Lead, Spy
 from . import models
 from django.shortcuts import get_object_or_404
 from .forms import *
@@ -23,25 +23,28 @@ def details_lead(request, pk):
 
 
 def create_lead(request):
-    form = Lead_form()
+    form = LeadForm()
     if request.method == "POST":
-        form = Lead_form(request.POST)
+        form = LeadForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data["name"]
-            last_name = form.cleaned_data["last_name"]
-            age = form.cleaned_data["age"]
-            email = form.cleaned_data["email"]
-            spy = models.Spy.objects.first()
-            models.Lead.objects.create(
-                name=name, last_name=last_name, email=email, age=age, spy=spy
-            )
+            form.save()
             return redirect("/")
     context = {"form": form}
     return render(request, "create.html", context)
 
+
 def update_lead(request, pk):
-    form = Lead.objects.get(id=pk)
-    context = {
-        "form": form
-    }
-    return render(request, 'update.html', context)
+    lead = models.Lead.objects.get(id=pk)
+    form = LeadForm(instance=lead)
+    if request.method == "POST":
+        form = LeadForm(request.POST, instance=lead)
+        if form.is_valid():
+            form.save()
+            return redirect("/")
+    context = {"form": form, "lead": lead}
+    return render(request, "update.html", context)
+
+def delete_lead(request, pk):
+    lead = models.Lead.objects.get(id=pk)
+    lead.delete()
+    return redirect('/')

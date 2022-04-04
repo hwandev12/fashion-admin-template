@@ -1,4 +1,7 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
 <link rel="stylesheet" href="{% static 'css/create.css' %}" />
 <link
   rel="stylesheet"
@@ -13,72 +16,13 @@
   href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"
 />
 <style>
-  form {
-    margin-top: 80px;
-  }
 </style>
 <div class="container mt-5">
-  <form method="post">
+  <h2 class="text-center" style="position: relative; z-index: 10;">Register</h2>
+  <form method="post" class="w-75 mx-auto">
     {% csrf_token %}
-    <div class="text-center mt-5">
-      <h1>Customers Contact</h1>
-    </div>
-    <div class="row">
-      <div class="col-lg-7 mx-auto">
-        <div class="card mt-2 mx-auto p-4 bg-light">
-          <div class="card-body bg-light">
-            <div class="container">
-              <form id="contact-form" role="form">
-                <div class="controls">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="form_name">Firstname *</label>
-                          {{ form.name}}
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="form_lastname">Lastname *</label>
-                        {{ form.last_name }}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="form_email">Email *</label>
-                        {{ form.email }}
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <label for="form_email">Age *</label>
-                      {{ form.age }}
-                      </div>
-                    <div class="col-md-12">
-                      <label for="form_email">Agent *</label>
-                      {{ form.spy }}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <input
-                        type="submit"
-                        class="btn btn-success btn-send pt-2 btn-block"
-                        value="Send Message"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-        <!-- /.8 -->
-      </div>
-      <!-- /.row-->
-    </div>
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-primary w-100">Submit</button>
   </form>
 </div>
 {% endblock content %}
