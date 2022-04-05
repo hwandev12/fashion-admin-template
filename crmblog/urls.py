@@ -1,11 +1,12 @@
 from django.urls import path
 from .views import *
 
+app_name = 'lead'
+
 urlpatterns = [
-    path('', home, name='home'),
-    path("leads/", leads_info),
-    path("<int:pk>/", details_lead),
-    path("<int:pk>/update/", update_lead),
-    path("<int:pk>/delete/", delete_lead),
-    path("create/", create_lead),
+    path("leads/", Leads.as_view(), name='leads'),
+    path("<int:pk>/", DetailsLead.as_view(), name='leads_info'),
+    path("<int:pk>/update/", UpdateLead.as_view(), name='update_lead'),
+    path("<int:pk>/delete/", DeleteLead.as_view(), name='delete_lead'),
+    path("create/", CreateLead.as_view(), name='create_lead'),
 ]

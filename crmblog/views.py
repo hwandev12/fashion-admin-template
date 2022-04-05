@@ -1,50 +1,46 @@
 from multiprocessing import context
-from django.shortcuts import render, redirect
+from re import template
+from django.shortcuts import render, redirect, reverse
 from .models import Lead, Spy
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from . import models
 from django.shortcuts import get_object_or_404
 from .forms import *
 
 
-def home(request):
-    return render(request, "base.html")
+class HomeView(TemplateView):
+    template_name = 'base.html'
 
 
-def leads_info(request):
-    leads = Lead.objects.all()
-    context = {"leads": leads}
-    return render(request, "leads_info.html", context)
+class Leads(ListView):
+    template_name = 'leads_info.html'
+    queryset = models.Lead.objects.all()
+    context_object_name = 'leads'
 
 
-def details_lead(request, pk):
-    lead = get_object_or_404(models.Lead, id=pk)
-    context = {"lead": lead}
-    return render(request, "details.html", context)
+class DetailsLead(DetailView):
+    template_name = 'details.html'
+    context_object_name = 'lead'
+    queryset = models.Lead.objects.all()
+    
+class CreateLead(CreateView):
+    template_name = 'create.html'
+    form_class = LeadForm
+    
+    def get_success_url(self):
+        return reverse('lead:leads')
+    
+class UpdateLead(UpdateView):
+    template_name = 'update.html'
+    form_class = LeadForm
+    queryset = models.Lead.objects.all()
+    
+    def get_success_url(self):
+        return reverse('lead:leads')
 
-
-def create_lead(request):
-    form = LeadForm()
-    if request.method == "POST":
-        form = LeadForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("/")
-    context = {"form": form}
-    return render(request, "create.html", context)
-
-
-def update_lead(request, pk):
-    lead = models.Lead.objects.get(id=pk)
-    form = LeadForm(instance=lead)
-    if request.method == "POST":
-        form = LeadForm(request.POST, instance=lead)
-        if form.is_valid():
-            form.save()
-            return redirect("/")
-    context = {"form": form, "lead": lead}
-    return render(request, "update.html", context)
-
-def delete_lead(request, pk):
-    lead = models.Lead.objects.get(id=pk)
-    lead.delete()
-    return redirect('/')
+class DeleteLead(DeleteView):
+    template_name = 'delete.html'
+    queryset = models.Lead.objects.all()
+    
+    def get_success_url(self):
+        return reverse('lead:leads')
