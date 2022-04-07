@@ -8,6 +8,13 @@ from django.shortcuts import get_object_or_404
 from .forms import *
 
 
+class SignupView(CreateView):
+    template_name = 'registration/signup.html'
+    form_class = RegisterForm
+    
+    def get_success_url(self):
+        return reverse('lead:leads')
+
 class HomeView(TemplateView):
     template_name = 'base.html'
 

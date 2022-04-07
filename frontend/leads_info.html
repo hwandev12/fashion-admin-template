@@ -1,23 +1,37 @@
-{% extends 'base.html' %}
-{% block content %}
-  <style>
-    .lead_info a {
-      width: 100%;
-      background-color: rgba(87, 79, 79, 0.5);
-      padding: 20px 20px;
-      display: block;
-      margin-top: 10px;
-      text-decoration: none;
-      font-family: sans-serif;
-      font-size: 21px;
-      color: #444;
-    }
-  </style>
-    <div class="lead_info container">
-      <a href="/create/">Sign up for a new user</a>
-      <h2>My system Users</h2>
-      {% for lead in leads %}
-        <a href="/{{ lead.pk }}/">{{ lead.name }} {{ lead.last_name }}</a>
-      {% endfor %}
+{% extends 'base.html' %} {% block content %}
+
+<style>
+  .name {
+    padding: 20px 0;
+    background-color: #ddd;
+    margin: 10px 0;
+    padding-left: 10px;
+  }
+</style>
+
+<section class="ftco-section bg-light" id="cards">
+  <div class="container card-styles">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card">
+          <div class="icon-wrap px-4 pt-4">
+            <div
+              class="icon d-flex justify-content-center align-items-center bg-info rounded-circle"
+            >
+              <span class="ion-logo-ionic text-light"></span>
+            </div>
+          </div>
+          <div class="card-body pb-5 px-4">
+            {% for lead in leads %}
+            <h5 class="card-title name">{{ lead.name }} {{ lead.last_name }}</h5>
+            <a href="/{{ lead.pk }}/" class="btn btn-info">Go to details</a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
     </div>
-  {% endblock content %}
+  </div>
+</section>
+<!-- - - - - -end- - - - -  -->
+
+{% endblock content %}
