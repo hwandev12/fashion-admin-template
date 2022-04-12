@@ -3,17 +3,18 @@ from django.shortcuts import render
 from django.views import generic
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .mixins import OrganiserAndLoginRequiredMixin
 from crmblog.models import Spy
 from .forms import AgentCreateModel
 
-class AgentListView(LoginRequiredMixin, generic.ListView):
+class AgentListView(OrganiserAndLoginRequiredMixin, generic.ListView):
     template_name = 'agents/lists.html'
     
     def get_queryset(self):
         organiser = self.request.user.userprofile
         return Spy.objects.filter(organiser=organiser)
     
-class AgentCreateView(LoginRequiredMixin, generic.CreateView):
+class AgentCreateView(OrganiserAndLoginRequiredMixin, generic.CreateView):
     template_name = 'agents/create.html'
     form_class = AgentCreateModel
     
@@ -25,7 +26,7 @@ class AgentCreateView(LoginRequiredMixin, generic.CreateView):
         agent.profile = self.request.user.userprofile
         agent.save()
         return super(AgentCreateView, self).form_valid(form)
-class AgentDetailView(LoginRequiredMixin, generic.DetailView):
+class AgentDetailView(OrganiserAndLoginRequiredMixin, generic.DetailView):
     template_name = 'agents/details.html'
     context_object_name = 'agents'
     
@@ -33,7 +34,7 @@ class AgentDetailView(LoginRequiredMixin, generic.DetailView):
         organiser = self.request.user.userprofile
         return Spy.objects.filter(organiser=organiser)
     
-class AgentUpdateView(LoginRequiredMixin, generic.UpdateView):
+class AgentUpdateView(OrganiserAndLoginRequiredMixin, generic.UpdateView):
     template_name = 'agents/update.html'
     form_class = AgentCreateModel
     
@@ -44,7 +45,7 @@ class AgentUpdateView(LoginRequiredMixin, generic.UpdateView):
         organiser = self.request.user.userprofile
         return Spy.objects.filter(organiser=organiser)
     
-class AgentDeleteView(LoginRequiredMixin, generic.DeleteView):
+class AgentDeleteView(OrganiserAndLoginRequiredMixin, generic.DeleteView):
     template_name = 'agents/delete.html'
     context_object_name = 'agent'
     

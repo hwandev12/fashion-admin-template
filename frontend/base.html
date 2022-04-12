@@ -58,6 +58,7 @@
                   <span class="ms-1 d-none d-sm-inline">Home</span>
                 </a>
               </li>
+              {% if request.user.is_organised %}
               <li>
                 <a
                   href="#submenu1"
@@ -84,29 +85,6 @@
                   </li>
                 </ul>
               </li>
-              {% if request.user.is_authenticated %}
-              <li>
-                <a href="/logout/" class="nav-link px-0 align-middle">
-                  <i class="fs-4 bi-table"></i>
-                  <span class="ms-1 d-none d-sm-inline">Logout</span></a
-                >
-              </li>
-              {% else %}
-              <li>
-                <a href="/login/" class="nav-link px-0 align-middle">
-                  <i class="fs-4 bi-table"></i>
-                  <span class="ms-1 d-none d-sm-inline">Login</span></a
-                >
-              </li>
-              {% endif %}
-              {% if not request.user.is_authenticated %}
-              <li>
-                <a href="/signup/" class="nav-link px-0 align-middle">
-                  <i class="fs-4 bi-table"></i>
-                  <span class="ms-1 d-none d-sm-inline">Sign Up</span></a
-                >
-              </li>
-              {% endif %}
               <li>
                 <a
                   href="#submenu2"
@@ -133,6 +111,30 @@
                   </li>
                 </ul>
               </li>
+              {% endif %}
+              {% if request.user.is_authenticated %}
+              <li>
+                <a href="/logout/" class="nav-link px-0 align-middle">
+                  <i class="fs-4 bi-table"></i>
+                  <span class="ms-1 d-none d-sm-inline">Logout</span></a
+                >
+              </li>
+              {% else %}
+              <li>
+                <a href="/login/" class="nav-link px-0 align-middle">
+                  <i class="fs-4 bi-table"></i>
+                  <span class="ms-1 d-none d-sm-inline">Login</span></a
+                >
+              </li>
+              {% endif %}
+              {% if not request.user.is_authenticated %}
+              <li>
+                <a href="/signup/" class="nav-link px-0 align-middle">
+                  <i class="fs-4 bi-table"></i>
+                  <span class="ms-1 d-none d-sm-inline">Sign Up</span></a
+                >
+              </li>
+              {% endif %}
               <li>
                 <a
                   href="#submenu3"
