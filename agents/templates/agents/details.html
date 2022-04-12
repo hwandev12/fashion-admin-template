@@ -1,0 +1,9 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <h2>The customer info</h2>
+  The name is {{ agent.user.username }} <br />
+  <a class="btn btn-primary" href="{% url 'agents:update-agent' agents.pk %}">update</a>
+  <a class="btn btn-primary" href="{% url 'agents:delete-agent' agents.pk %}">delete</a>
+
+</div>
+{% endblock content %}

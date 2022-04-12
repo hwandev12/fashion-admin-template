@@ -23,7 +23,7 @@
           </div>
           <div class="card-body pb-5 px-4">
             {% for agent in object_list %}
-            <h5 class="card-title name">{{ agent.user.username }}</h5>
+            <a href="{% url 'agents:agent-info' agent.pk %}"><h5 class="card-title name">{{ agent.user.username }}</h5></a>
             {% endfor %}
           </div>
         </div>

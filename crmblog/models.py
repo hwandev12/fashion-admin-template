@@ -29,7 +29,7 @@ class Lead(models.Model):
 
 class Spy(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    organiser = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.user)

@@ -5,11 +5,11 @@ from .models import Lead, Spy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from . import models
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from .forms import *
 
 
-class SignupView(LoginRequiredMixin, CreateView):
+class SignupView(CreateView):
     template_name = 'registration/signup.html'
     form_class = RegisterForm
     
