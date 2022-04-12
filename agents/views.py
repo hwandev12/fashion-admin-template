@@ -19,5 +19,11 @@ class AgentCreateView(LoginRequiredMixin, generic.CreateView):
     def get_success_url(self):
         return reverse('agents:agent-list')
     
+    def form_valid(self, form):
+        agent = form.save(commit=False)
+        agent.profile = self.request.user.userprofile
+        agent.save()
+        return super(AgentCreateView, self).form_valid(form)
+    
 
 
