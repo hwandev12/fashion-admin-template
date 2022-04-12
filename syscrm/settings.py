@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'crmblog',
     "crispy_forms",
     "crispy_bootstrap5",
+    'agents',
 ]
 
 MIDDLEWARE = [

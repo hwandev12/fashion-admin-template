@@ -11,4 +11,5 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('signup/', SignupView.as_view(), name='signup'),
     path('', include('crmblog.urls')),
+    path('agents/', include('agents.urls')),
 ]
