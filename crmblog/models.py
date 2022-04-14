@@ -21,7 +21,8 @@ class Lead(models.Model):
     last_name = models.CharField(max_length=30)
     age = models.IntegerField(default=0)
     email = models.EmailField()
-    spy = models.ForeignKey("Spy", on_delete=models.CASCADE)
+    organiser = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    spy = models.ForeignKey("Spy", null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.name

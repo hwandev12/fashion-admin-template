@@ -22,8 +22,16 @@ class HomeView(TemplateView):
 
 class Leads(LoginRequiredMixin, ListView):
     template_name = 'leads_info.html'
-    queryset = models.Lead.objects.all()
     context_object_name = 'leads'
+    
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_organised:
+            queryset = models.Lead.objects.filter(organiser=user.userprofile)
+        else:
+            queryset = models.Lead.objects.filter(organiser=user.spy.organiser)
+            queryset = queryset.filter(spy__user=self.request.user)
+        return queryset
 
 
 class DetailsLead(LoginRequiredMixin, DetailView):
