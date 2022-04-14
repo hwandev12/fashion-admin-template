@@ -22,7 +22,7 @@
   <form method="post" class="w-75 mx-auto">
     {% csrf_token %}
     {{ form|crispy }}
-    <a class="text-decoration-none" href="{% url 'password-reset-view' %}">Forget password</a>
+    <a class="text-decoration-none" href="{% url 'password_reset_view' %}">Forget password</a>
     <button type="submit" class="btn btn-primary w-100">Login</button>
   </form>
 </div>
