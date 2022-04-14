@@ -14,6 +14,7 @@ urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('signup/', SignupView.as_view(), name='signup'),
+    path('password-reset-view/', PasswordResetView.as_view(), name='password_reset_view'),
     path('', include('crmblog.urls')),
     path('agents/', include('agents.urls')),
 ]
