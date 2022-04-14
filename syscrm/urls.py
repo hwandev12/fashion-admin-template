@@ -1,7 +1,11 @@
 from os import name
 from django.contrib import admin
 from django.urls import path, include
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import(
+     LoginView,
+     LogoutView,
+     PasswordResetView,
+)
 from crmblog.views import HomeView, SignupView
 
 urlpatterns = [
