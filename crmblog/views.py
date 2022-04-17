@@ -46,6 +46,12 @@ class CreateLead(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         return reverse('lead:leads')
     
+    def form_valid(self, form):
+        lead = form.save(commit=False)
+        lead.organiser = self.request.user.userprofile
+        lead.save()
+        return super(CreateLead, self).form_valid(form)
+    
 class UpdateLead(LoginRequiredMixin, UpdateView):
     template_name = 'update.html'
     form_class = LeadForm
