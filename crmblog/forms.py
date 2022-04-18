@@ -34,7 +34,7 @@ class AgentAssignForm(forms.Form):
     
     def __init__(self, *args, **kwargs):
         request = kwargs.pop('request')
-        agents = Spy.objects.filter(organiser=request.user.userprofile)
+        spies = Spy.objects.filter(organiser=request.user.userprofile)
         super(AgentAssignForm, self).__init__(*args, **kwargs)
-        self.fields['agent'].queryset = agents
+        self.fields['agent'].queryset = spies
 # Agent tayyorlash uchun yozilgan class based form

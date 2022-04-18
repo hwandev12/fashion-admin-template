@@ -35,6 +35,7 @@
 
 <!-- Unassigned leads lists -->
 {% if unassigned_leads.exists %}
+<h1 class="p-4">Unassigned Agents</h1>
 <section class="ftco-section bg-light" id="cards">
   <div class="container card-styles">
     <div class="row">
@@ -50,7 +51,7 @@
           <div class="card-body pb-5 px-4">
             {% for lead in unassigned_leads %}
             <h5 class="card-title name">{{ lead.name }} {{ lead.last_name }}</h5>
-            <a href="/{{ lead.pk }}/" class="btn btn-info">Go to details</a>
+            <a href="{% url 'lead:assign_agent' lead.pk %}" class="btn btn-info">Go to details</a>
             {% endfor %}
           </div>
         </div>
