@@ -1,13 +1,13 @@
 from multiprocessing import context
 from re import template
 from django.shortcuts import render, redirect, reverse
+from .forms import *
 from .models import Lead, Spy
 from agents.mixins import OrganiserAndLoginRequiredMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import *
 from . import models
 from django.shortcuts import get_object_or_404, render
-from .forms import *
 
 
 class SignupView(CreateView):
@@ -53,7 +53,7 @@ class Leads(LoginRequiredMixin, ListView):
 class DetailsLead(OrganiserAndLoginRequiredMixin, DetailView):
     template_name = 'details.html'
     context_object_name = 'lead'
-    queryset = models.Lead.objects.all()
+    queryset = Lead.objects.all()
     
 class CreateLead(OrganiserAndLoginRequiredMixin, CreateView):
     template_name = 'create.html'
@@ -71,14 +71,14 @@ class CreateLead(OrganiserAndLoginRequiredMixin, CreateView):
 class UpdateLead(OrganiserAndLoginRequiredMixin, UpdateView):
     template_name = 'update.html'
     form_class = LeadForm
-    queryset = models.Lead.objects.all()
+    queryset = Lead.objects.all()
     
     def get_success_url(self):
         return reverse('lead:leads')
 
 class DeleteLead(OrganiserAndLoginRequiredMixin, DeleteView):
     template_name = 'delete.html'
-    queryset = models.Lead.objects.all()
+    queryset = Lead.objects.all()
     
     def get_success_url(self):
         return reverse('lead:leads')
@@ -86,7 +86,22 @@ class DeleteLead(OrganiserAndLoginRequiredMixin, DeleteView):
 # Agenti aniqlanmagan user lar uchun class based view
 class AgentAssignView(OrganiserAndLoginRequiredMixin, FormView):
     template_name = 'assign_agent.html'
-    form_class = AssignAgentForm
+    form_class = AgentAssignForm
+    
+    def get_form_kwargs(self, **kwargs):
+        kwargs = super(AgentAssignView, self).get_form_kwargs(**kwargs)
+        kwargs.update({
+                'request': self.request
+            })
+        return kwargs
     
     def get_success_url(self):
         return reverse('lead:leads')
+    
+    def form_valid(self, form):
+        spy = form.cleaned_data['agent']
+        lead = Lead.objects.get(id=self.kwargs['pk'])
+        lead.spy = spy
+        lead.save()
+        return super(AgentAssignView, self).form_valid(form)
+    # Agenti aniqlanmagan user lar uchun class based view
