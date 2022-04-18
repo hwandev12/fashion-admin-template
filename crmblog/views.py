@@ -2,8 +2,9 @@ from multiprocessing import context
 from re import template
 from django.shortcuts import render, redirect, reverse
 from .models import Lead, Spy
+from agents.mixins import OrganiserAndLoginRequiredMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import *
 from . import models
 from django.shortcuts import get_object_or_404, render
 from .forms import *
@@ -49,12 +50,12 @@ class Leads(LoginRequiredMixin, ListView):
     # Bu yerda aniqlanmagan agent uchun funksiya yozilgan
 
 
-class DetailsLead(LoginRequiredMixin, DetailView):
+class DetailsLead(OrganiserAndLoginRequiredMixin, DetailView):
     template_name = 'details.html'
     context_object_name = 'lead'
     queryset = models.Lead.objects.all()
     
-class CreateLead(LoginRequiredMixin, CreateView):
+class CreateLead(OrganiserAndLoginRequiredMixin, CreateView):
     template_name = 'create.html'
     form_class = LeadForm
     
@@ -67,7 +68,7 @@ class CreateLead(LoginRequiredMixin, CreateView):
         lead.save()
         return super(CreateLead, self).form_valid(form)
     
-class UpdateLead(LoginRequiredMixin, UpdateView):
+class UpdateLead(OrganiserAndLoginRequiredMixin, UpdateView):
     template_name = 'update.html'
     form_class = LeadForm
     queryset = models.Lead.objects.all()
@@ -75,9 +76,17 @@ class UpdateLead(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse('lead:leads')
 
-class DeleteLead(LoginRequiredMixin, DeleteView):
+class DeleteLead(OrganiserAndLoginRequiredMixin, DeleteView):
     template_name = 'delete.html'
     queryset = models.Lead.objects.all()
+    
+    def get_success_url(self):
+        return reverse('lead:leads')
+
+# Agenti aniqlanmagan user lar uchun class based view
+class AgentAssignView(OrganiserAndLoginRequiredMixin, FormView):
+    template_name = 'assign_agent.html'
+    form_class = AssignAgentForm
     
     def get_success_url(self):
         return reverse('lead:leads')
