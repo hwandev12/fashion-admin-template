@@ -7,6 +7,7 @@ from django.contrib.auth import get_user_model
 from django import forms
 from .models import Lead
 from crmblog import models
+from .models import *
 
 User = get_user_model()
 
@@ -26,3 +27,14 @@ class RegisterForm(UserCreationForm):
         model = User
         fields = ("username",)
         field_classes = {'username': UsernameField}
+        
+# Agent tayyorlash uchun yozilgan class based form
+class AgentAssignForm(forms.Form):
+    agent = forms.ModelChoiceField(queryset=Spy.objects.none())
+    
+    def __init__(self, *args, **kwargs):
+        request = kwargs.pop('request')
+        agents = Spy.objects.filter(organiser=request.user.userprofile)
+        super(AgentAssignForm, self).__init__(*args, **kwargs)
+        self.fields['agent'].queryset = agents
+# Agent tayyorlash uchun yozilgan class based form
