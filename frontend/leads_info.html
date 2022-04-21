@@ -26,6 +26,7 @@
             <h5 class="card-title name">{{ lead.name }} {{ lead.last_name }}</h5>
             <a href="/{{ lead.pk }}/" class="btn btn-info">Go to details</a>
             <a href="{% url 'lead:category_lead' %}" class="btn btn-info">Customers category</a>
+            <a href="{% url 'lead:category_update' lead.pk %}" class="btn btn-info">Type</a>
             {% endfor %}
           </div>
         </div>

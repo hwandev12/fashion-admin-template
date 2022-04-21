@@ -22,7 +22,7 @@
 
           {% for lead in category.leads.all %}
           <tr>
-            <td class="px-4 py-3">{{ lead.name }}</td>
+            <td class="px-4 py-3"><a class="hover:text-blue-500" href="{% url 'lead:leads_info' lead.pk %}">{{ lead.name }}</a></td>
             <td class="px-4 py-3">Number</td>
           </tr>
           {% endfor %}
