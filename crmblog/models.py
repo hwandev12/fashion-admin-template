@@ -38,10 +38,10 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'Category'
         verbose_name_plural = 'Main Category Model'
-    name = models.CharField(max_length=30)
+    category_name = models.CharField(max_length=30)
 
     def __str__(self):
-        return str(self.name)
+        return str(self.category_name)
 
 
 class Spy(models.Model):
