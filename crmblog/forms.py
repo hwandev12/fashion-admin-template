@@ -11,6 +11,7 @@ from .models import *
 
 User = get_user_model()
 
+
 class LeadForm(forms.ModelForm):
     class Meta:
         model = Lead
@@ -21,20 +22,31 @@ class LeadForm(forms.ModelForm):
             "age",
             "spy",
         )
-        
+
+
 class RegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ("username",)
         field_classes = {'username': UsernameField}
-        
+
 # Agent tayyorlash uchun yozilgan class based form
+
+
 class AgentAssignForm(forms.Form):
     agent = forms.ModelChoiceField(queryset=Spy.objects.none())
-    
+
     def __init__(self, *args, **kwargs):
         request = kwargs.pop('request')
         spies = Spy.objects.filter(organiser=request.user.userprofile)
         super(AgentAssignForm, self).__init__(*args, **kwargs)
         self.fields['agent'].queryset = spies
 # Agent tayyorlash uchun yozilgan class based form
+
+
+class LeadCategoryUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Lead
+        fields = (
+            'category',
+        )
