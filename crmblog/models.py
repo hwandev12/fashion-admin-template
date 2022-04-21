@@ -28,7 +28,7 @@ class Lead(models.Model):
     spy = models.ForeignKey("Spy", null=True, blank=True,
                             on_delete=models.SET_NULL)
     category = models.ForeignKey(
-        'Category', blank=True, null=True, on_delete=models.SET_NULL)
+        'Category', blank=True, related_name='leads', null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.name
