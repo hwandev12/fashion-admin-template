@@ -20,6 +20,11 @@
         </thead>
         <tbody>
 
+          <tr>
+            <td class="px-4 py-3">Unassigned Customers</td>
+            <td class="px-4 py-3">{{ unassigned_category_quantity }}</td>
+          </tr>
+
           {% for category in categories %}
           <tr>
             <td class="px-4 py-3">{{ category.category_name }}</td>
