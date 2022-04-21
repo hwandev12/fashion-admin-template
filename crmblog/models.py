@@ -39,6 +39,7 @@ class Category(models.Model):
         verbose_name = 'Category'
         verbose_name_plural = 'Main Category Model'
     category_name = models.CharField(max_length=30)
+    organiser = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.category_name)
