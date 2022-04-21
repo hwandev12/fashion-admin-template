@@ -2,7 +2,7 @@ from multiprocessing import context
 from re import template
 from django.shortcuts import render, redirect, reverse
 from .forms import *
-from .models import Lead, Spy
+from .models import Lead, Spy, Category
 from agents.mixins import OrganiserAndLoginRequiredMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import *
@@ -97,8 +97,8 @@ class AgentAssignView(OrganiserAndLoginRequiredMixin, FormView):
     def get_form_kwargs(self, **kwargs):
         kwargs = super(AgentAssignView, self).get_form_kwargs(**kwargs)
         kwargs.update({
-                'request': self.request
-            })
+            'request': self.request
+        })
         return kwargs
 
     def get_success_url(self):
@@ -116,4 +116,13 @@ class AgentAssignView(OrganiserAndLoginRequiredMixin, FormView):
 class CategoryAssignView(LoginRequiredMixin, ListView):
     template_name = 'category.html'
     context_object_name = 'categories'
-    queryset = Lead.objects.all()
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_organised:
+            queryset = Category.objects.filter(
+                organiser=user.userprofile)
+        else:
+            queryset = Category.objects.filter(
+                organiser=user.spy.organiser)
+        return queryset
