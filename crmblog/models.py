@@ -6,11 +6,14 @@ from django.db.models.signals import post_save
 class User(AbstractUser):
     is_organised = models.BooleanField(default=True)
     is_agent = models.BooleanField(default=False)
+
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.user.username)
+
 
 class Lead(models.Model):
     class Meta:
@@ -22,10 +25,23 @@ class Lead(models.Model):
     age = models.IntegerField(default=0)
     email = models.EmailField()
     organiser = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
-    spy = models.ForeignKey("Spy", null=True, blank=True, on_delete=models.SET_NULL)
+    spy = models.ForeignKey("Spy", null=True, blank=True,
+                            on_delete=models.SET_NULL)
+    category = models.ForeignKey(
+        'Category', blank=True, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.name
+
+
+class Category(models.Model):
+    class Meta:
+        verbose_name = 'Category'
+        verbose_name_plural = 'Main Category Model'
+    name = models.CharField(max_length=30)
+
+    def __str__(self):
+        return str(self.name)
 
 
 class Spy(models.Model):
@@ -38,6 +54,7 @@ class Spy(models.Model):
 
 def create_post_save(sender, instance, created, **kwargs):
     if created:
-        UserProfile.objects.create(user=instance)    
+        UserProfile.objects.create(user=instance)
+
 
 post_save.connect(create_post_save, sender=User)
