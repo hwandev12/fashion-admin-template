@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Category page{% endblock title %}
+
+{% block content %}
+<h1>This is category model here</h1>
+{% for m in categories %}
+  <h2>{{ m.category }}</h2>
+{% endfor %}
+{% endblock content %}
