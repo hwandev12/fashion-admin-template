@@ -20,9 +20,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'x*v$7v2kz%43tq2&)ftko*iy0)jl^c$j7am0$^#qvs+u%=t19g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['fashion-admin-template.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
