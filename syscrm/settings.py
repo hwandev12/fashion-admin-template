@@ -1,5 +1,14 @@
 from pathlib import Path
+import environ
 
+env = environ.Env(
+    DEBUG=(bool, False)
+)
+
+environ.Env.read_env()
+
+DEBUG = env('DEBUG')
+SECRET_KEY = env('SECRET_KEY')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -8,7 +17,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-x*v$7v2kz%43tq2&)ftko*iy0)jl^c$j7am0$^#qvs+u%=t19g'
+SECRET_KEY = 'x*v$7v2kz%43tq2&)ftko*iy0)jl^c$j7am0$^#qvs+u%=t19g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -47,7 +56,7 @@ ROOT_URLCONF = 'syscrm.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ BASE_DIR / 'frontend' ],
+        'DIRS': [BASE_DIR / 'frontend'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,8 +77,14 @@ WSGI_APPLICATION = 'syscrm.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'ddtu2vj7pj9991',
+        'USER': 'aadowgxsztzjdt',
+        'PASSWORD': 'b4661db12ca8773d67a17cfde1b3cb956f8cac19f3a4d0ff6f134b20f1a4fa01',
+        'HOST': 'ec2-3-224-125-117.compute-1.amazonaws.com',
+        'PORT': '5432'
     }
 }
 
